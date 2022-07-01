@@ -7,7 +7,11 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "localhost:8080"
+    if Rails.env.production?
+      origins 'https://rails-nuxt-app-5bbf1.web.app'
+    else
+      origins "localhost:8080"
+    end
 
     resource "*",
       headers: :any,
